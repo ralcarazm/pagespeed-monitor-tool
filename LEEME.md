@@ -1,5 +1,7 @@
 # pagespeed-monitor-tool
 
+![pagespeed-monitor-tool workflow](https://github.com/ralcarazm/pagespeed-monitor-tool/blob/main/pagespeed-monitor-tool.png)
+
 **pagespeed-monitor-tool** es una herramienta de línea de comandos desarrollada en Python para auditar una o más URLs con la API de Google PageSpeed Insights. Recupera datos de laboratorio de Lighthouse, puntuaciones por categoría de PageSpeed y, cuando están disponibles, datos de campo procedentes de Chrome User Experience Report (CrUX).
 
 La herramienta está pensada para análisis por lotes, tareas de monitorización y flujos de trabajo de investigación. Puede exportar resultados a CSV y XLSX, escribir logs de ejecución, gestionar errores temporales de red o de la API mediante reintentos y conservar resultados parciales mientras el proceso está en ejecución.
