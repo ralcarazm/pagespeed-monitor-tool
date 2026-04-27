@@ -1,0 +1,189 @@
+# ------------------------------------------------------------
+# CONFIGURACIÓN GENERAL DE GOOGLE PAGESPEED INSIGHTS API
+# ------------------------------------------------------------
+
+# Clave de la API de PageSpeed Insights.
+# Sustituye el valor por tu API key real.
+api_key = "Aquí_tu_clave_API"
+
+
+# ------------------------------------------------------------
+# FICHEROS DE SALIDA
+# ------------------------------------------------------------
+
+# Archivo CSV de salida.
+# Se recomienda guardarlo dentro de una carpeta. Por ejemplo, "results".
+output = "results/pagespeed_results.csv"
+
+# Archivo Excel de salida.
+# Es la opción más recomendable para trabajar con los datos en Excel,
+# porque conserva correctamente los tipos numéricos.
+xlsx_output = "results/pagespeed_results.xlsx"
+
+# Indica si se debe generar el archivo CSV.
+# Valores posibles: true / false.
+write_csv = true
+
+# Indica si se debe generar el archivo XLSX.
+# Valores posibles: true / false.
+write_xlsx = true
+
+
+# ------------------------------------------------------------
+# CONFIGURACIÓN DEL CSV
+# ------------------------------------------------------------
+
+# Codificación del CSV.
+# "utf-8-sig" añade BOM y facilita que Excel detecte correctamente
+# los caracteres acentuados al abrir el archivo directamente.
+csv_encoding = "utf-8-sig"
+
+# Separador de columnas del CSV.
+# En Excel con configuración española/catalana suele ser preferible ";"
+# porque la coma se usa como separador decimal.
+csv_delimiter = ";"
+
+# Convierte los decimales del CSV al formato con coma decimal.
+# Ejemplo: 888.049 pasa a 888,049.
+# Esto evita interpretaciones erróneas al abrir el CSV en Excel.
+csv_decimal_comma = true
+
+
+# ------------------------------------------------------------
+# VALORES LEGIBLES Y VALORES DE CONTROL
+# ------------------------------------------------------------
+
+# Si se establece en true, también exportará los valores "display"
+# devueltos por Lighthouse, como "5,1 s" o "120 ms".
+# Para análisis cuantitativo en Excel es mejor dejarlo en false,
+# porque esos valores incluyen unidades y son más difíciles de operar.
+include_display_values = false
+
+# Rellena algunos campos textuales vacíos con valores controlados.
+# Por ejemplo:
+# - error_type = "sin_error"
+# - error_message = "sin_error"
+# - field_url_data_status = "not_available"
+#
+# Las columnas numéricas siguen quedando vacías cuando no hay datos,
+# para que Excel las trate como columnas numéricas.
+fill_control_values = true
+
+# Elimina del CSV/XLSX las columnas que estén completamente vacías.
+# Puede ser útil para generar una hoja más compacta.
+# Recomendación:
+# - false si quieres conservar siempre la misma estructura de columnas;
+# - true si prefieres un archivo final más limpio.
+drop_empty_columns = false
+
+
+# ------------------------------------------------------------
+# LOGS DE EJECUCIÓN
+# ------------------------------------------------------------
+
+# Activa o desactiva la generación de logs.
+# Valores posibles: true / false.
+log_enabled = true
+
+# Carpeta donde se guardarán los ficheros de log.
+# El script creará la carpeta automáticamente si no existe.
+log_dir = "logs"
+
+# Nivel de detalle del log.
+# Valores habituales:
+# - "DEBUG": máximo detalle;
+# - "INFO": información general de ejecución;
+# - "WARNING": solo avisos y errores;
+# - "ERROR": solo errores.
+log_level = "INFO"
+
+
+# ------------------------------------------------------------
+# ESTRATEGIAS Y CATEGORÍAS DE LIGHTHOUSE
+# ------------------------------------------------------------
+
+# Estrategias de análisis.
+# "mobile" simula condiciones móviles.
+# "desktop" simula condiciones de escritorio.
+#
+# Cada estrategia genera una petición independiente por URL.
+# Ejemplo:
+# 5 URLs × 2 estrategias = 10 peticiones a la API.
+strategies = ["mobile", "desktop"]
+
+# Categorías de Lighthouse que se solicitarán a PageSpeed Insights.
+#
+# Valores posibles:
+# - "performance": rendimiento;
+# - "accessibility": accesibilidad;
+# - "best-practices": buenas prácticas;
+# - "seo": optimización para buscadores.
+#
+# Estas categorías no multiplican el número de peticiones:
+# se solicitan dentro de la misma llamada a la API.
+categories = ["performance", "accessibility", "best-practices", "seo"]
+
+
+# ------------------------------------------------------------
+# IDIOMA Y CONTROL DE RITMO
+# ------------------------------------------------------------
+
+# Idioma de los resultados devueltos por PageSpeed Insights.
+# "es" devuelve los textos en español cuando están disponibles.
+locale = "es"
+
+# Pausa entre peticiones, en segundos.
+# Ayuda a evitar errores por exceso de peticiones.
+# Con 1.0 se realiza aproximadamente una petición por segundo.
+sleep = 1.0
+
+# Tiempo máximo de espera por petición, en segundos.
+# Si la API no responde dentro de este tiempo, se considera timeout.
+timeout = 120
+
+
+# ------------------------------------------------------------
+# REINTENTOS ANTE ERRORES TEMPORALES
+# ------------------------------------------------------------
+
+# Número de reintentos ante errores temporales de red o de la API.
+# El número total máximo de intentos será:
+# 1 intento inicial + retries.
+#
+# Con retries = 3, cada análisis puede intentarse hasta 4 veces.
+retries = 3
+
+# Factor de espera entre reintentos.
+# Se aplica una espera progresiva.
+#
+# Con retry_backoff = 2.0:
+# - primer reintento: espera 2 segundos;
+# - segundo reintento: espera 4 segundos;
+# - tercer reintento: espera 8 segundos.
+retry_backoff = 2.0
+
+# Códigos HTTP que se consideran errores temporales y que activan reintentos.
+#
+# 408: Request Timeout.
+# 429: Too Many Requests.
+# 500: Internal Server Error.
+# 502: Bad Gateway.
+# 503: Service Unavailable.
+# 504: Gateway Timeout.
+retry_status_codes = [408, 429, 500, 502, 503, 504]
+
+
+# ------------------------------------------------------------
+# URLS QUE SE QUIEREN ANALIZAR
+# ------------------------------------------------------------
+
+# Lista de URLs que se analizarán.
+# Cada URL debe empezar por "http://" o "https://".
+#
+# El número total de análisis será:
+# número de URLs × número de estrategias.
+urls = [
+  "https://www.ejemplo.com",
+  "https://www.ejemplo2.com",
+  "https://www.ejemplo3.com"
+]
