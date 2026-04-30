@@ -1,4 +1,4 @@
-# pagespeed-monitor-tool
+# Pagespeed Monitor Tool
 
 ![pagespeed-monitor-tool workflow](https://github.com/ralcarazm/pagespeed-monitor-tool/blob/main/pagespeed-monitor-tool.png)
 
